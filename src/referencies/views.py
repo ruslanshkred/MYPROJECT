@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from . import models, forms
 from django.views import generic
 
