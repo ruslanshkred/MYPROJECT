@@ -1,16 +1,17 @@
 from unittest.util import _MAX_LENGTH
 from django.db import models
-
+from django.urls import reverse_lazy
 # Create your models here.
 
 class Author(models.Model):
     name = models.CharField(
         max_length = 40,
-        verbose_name = 'Author name'
+        verbose_name = 'Имя автора'
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        verbose_name = 'Описание'
     )
 
     def __str__(self):
@@ -20,17 +21,18 @@ class Author(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/author/{self.pk}'
+        return reverse_lazy('author-list', kwargs={'pk': self.pk})
 
 
 class Serie(models.Model):
     name = models.CharField(
         max_length = 30,
-        verbose_name = "Serie name"
+        verbose_name = "Серия"
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        verbose_name = 'Описание'
     )
     def __str__(self):
         return self.name
@@ -39,17 +41,18 @@ class Serie(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/author/{self.pk}'
+        return reverse_lazy('serie-list', kwargs={'pk': self.pk})
 
 
 class Genrie(models.Model):
     name = models.CharField(
         max_length = 30,
-        verbose_name = "Genrie name"
+        verbose_name = "Жанр"
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        verbose_name = 'Описание'
     )
     def __str__(self):
         return self.name
@@ -58,17 +61,18 @@ class Genrie(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return f'/author/{self.pk}'
+        return reverse_lazy('genrie-list', kwargs={'pk': self.pk})
 
 
 class PublishingHouse(models.Model):
     name = models.CharField(
         max_length = 50,
-        verbose_name = "Publishing House name"
+        verbose_name = "Издательство"
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        verbose_name = 'Описание'
     )
     def __str__(self):
         return self.name
@@ -77,17 +81,18 @@ class PublishingHouse(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/author/{self.pk}'
+        return reverse_lazy('ph-list', kwargs={'pk': self.pk})
 
 
 class Units(models.Model):
     name = models.CharField(
         max_length = 10,
-        verbose_name = "Units name"
+        verbose_name = "Единицы измерения"
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        verbose_name = 'Описание'
     )
     def __str__(self):
         return self.name
@@ -96,4 +101,4 @@ class Units(models.Model):
         return self.name
         
     def get_absolute_url(self):
-        return f'/author/{self.pk}'
+        return reverse_lazy('author-list', kwargs={'units': self.pk})

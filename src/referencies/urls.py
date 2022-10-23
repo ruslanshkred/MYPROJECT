@@ -1,0 +1,35 @@
+from django.urls import path
+from . import views
+app_name='referencies'
+
+urlpatterns=[
+    path('author/', views.ListAuthor.as_view(), name='author-list'),
+    path('author/<int:pk>/', views.DetailAuthor.as_view(), name='author-detail'),
+    path('author-create/', views.CreateAuthor.as_view(), name='author-create'),
+    path('author-update/<int:pk>/', views.UpdateAuthor.as_view(), name='author-update'),
+    path('author-delete/<int:pk>/', views.DeleteAuthor.as_view(), name='author-delete'),
+
+    path('serie/', views.ListSerie.as_view(), name='serie-list'),
+    path('serie/<int:pk>/', views.DetailSerie.as_view(), name='serie-detail'),
+    path('serie-create/', views.CreateSerie.as_view(), name='serie-create'),
+    path('serie-update/<int:pk>/', views.UpdateSerie.as_view(), name='serie-update'),
+    path('serie-delete/<int:pk>/', views.DeleteSerie.as_view(), name='serie-delete'),
+
+    path('genrie/', views.ListGenrie.as_view(), name='genrie-list'),
+    path('genrie/<int:pk>/', views.DetailGenrie.as_view(), name='genrie-detail'),
+    path('genrie-create/', views.CreateGenrie.as_view(), name='genrie-create'),
+    path('genrie-update/<int:pk>/', views.UpdateGenrie.as_view(), name='genrie-update'),
+    path('genrie-delete/<int:pk>/', views.DeleteGenrie.as_view(), name='genrie-delete'),
+
+    path('ph/', views.ListPublishingHouse.as_view(), name='ph-list'),
+    path('ph/<int:pk>/', views.DetailPublishingHouse.as_view(), name='ph-detail'),
+    path('ph-create/', views.CreatePublishingHouse.as_view(), name='ph-create'),
+    path('ph-update/<int:pk>/', views.UpdatePublishingHouse.as_view(), name='ph-update'),
+    path('ph-delete/<int:pk>/', views.DeletePublishingHouse.as_view(), name='ph-delete'),
+
+    path('units/', views.ListUnits.as_view(), name='units-list'),
+    path('units/<int:pk>/', views.DetailUnits.as_view(), name='units-detail'),
+    path('units-create/', views.CreateUnits.as_view(), name='units-create'),
+    path('units-update/<int:pk>/', views.UpdateUnits.as_view(), name='units-update'),
+    path('units-delete/<int:pk>/', views.DeleteUnits.as_view(), name='units-delete'),
+]

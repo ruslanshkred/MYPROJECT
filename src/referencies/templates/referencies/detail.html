@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail form</title>
+    <title>Описание записи</title>
 </head>
 <body>
-    <h1>Detail</h1>
-    Number {{ object.pk }}<br>
-    Name {{ object.name }}
+    <h1>Описание записи</h1>
+    <table border="1">
+        <tr>
+            <td>Номер</td>
+            <td>Имя</td>
+            <td>Описание</td>
+        </tr>
+        <tr>
+            <td> {{ object.pk }}</td>
+            <td> {{object.name }}</td>
+            <td> {{object.description }}</td>
+        </tr>
+
+    </table>
+
 
 </body>
 </html>

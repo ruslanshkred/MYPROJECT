@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete form</title>
+    <title>Удалить запись</title>
 </head>
 <body>
-    <h1>Delete</h1>
-    Number {{ object.pk }}<br>
-    Name {{object.name }}
+    <h1>Удалить запись</h1>
+    <table border="1">
+        <tr>
+            <td>Номер</td>
+            <td>Имя</td>
+            <td>Описание</td>
+        </tr>
+        <tr>
+            <td> {{ object.pk }}</td>
+            <td> {{object.name }}</td>
+            <td> {{object.description }}</td>
+        </tr>
+
+    </table>
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" name="SUBMIT">
+        <input type="submit" name="Удалить">
     </form>
 
 </body>
