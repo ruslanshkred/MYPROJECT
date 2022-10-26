@@ -32,4 +32,22 @@ urlpatterns=[
     path('units-create/', views.CreateUnits.as_view(), name='units-create'),
     path('units-update/<int:pk>/', views.UpdateUnits.as_view(), name='units-update'),
     path('units-delete/<int:pk>/', views.DeleteUnits.as_view(), name='units-delete'),
+
+    path('cover/', views.ListCover.as_view(), name='cover-list'),
+    path('cover/<int:pk>/', views.DetailCover.as_view(), name='cover-detail'),
+    path('cover-create/', views.CreateCover.as_view(), name='cover-create'),
+    path('cover-update/<int:pk>/', views.UpdateCover.as_view(), name='cover-update'),
+    path('cover-delete/<int:pk>/', views.DeleteCover.as_view(), name='cover-delete'),
+
+    path('al/', views.ListAgeLimit.as_view(), name='al-list'),
+    path('al/<int:pk>/', views.DetailAgeLimit.as_view(), name='al-detail'),
+    path('al-create/', views.CreateAgeLimit.as_view(), name='al-create'),
+    path('al-update/<int:pk>/', views.UpdateAgeLimit.as_view(), name='al-update'),
+    path('al-delete/<int:pk>/', views.DeleteAgeLimit.as_view(), name='al-delete'),
+
+    path('rate/', views.ListRate.as_view(), name='rate-list'),
+    path('rate/<int:pk>/', views.DetailRate.as_view(), name='rate-detail'),
+    path('rate-create/', views.CreateRate.as_view(), name='rate-create'),
+    path('rate-update/<int:pk>/', views.UpdateRate.as_view(), name='rate-update'),
+    path('rate-delete/<int:pk>/', views.DeleteRate.as_view(), name='rate-delete'),
 ]

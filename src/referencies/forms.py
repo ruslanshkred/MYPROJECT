@@ -27,3 +27,19 @@ class UnitsGroup(forms.ModelForm):
     class Meta:
         model = models.Units
         fields = ['name', 'description']
+
+class CoverGroup(forms.ModelForm):
+    class Meta:
+        model = models.Cover
+        fields = ['name', 'description']
+
+
+class AgeLimitGroup(forms.ModelForm):
+    class Meta:
+        model = models.AgeLimit
+        fields = ['name', 'description']
+
+class RateGroup(forms.ModelForm):
+    class Meta:
+        model = models.Rate
+        fields = ['name', 'description']

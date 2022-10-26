@@ -184,3 +184,112 @@ class DeleteUnits(generic.DeleteView):
     model = models.Units
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:units-list')
+
+
+class ListCover(generic.ListView):
+    model = models.Cover
+    template_name = 'referencies/list_cover.html'
+
+class DetailCover(generic.DetailView):
+    model = models.Cover
+    template_name = 'referencies/detail.html'
+
+class CreateCover(generic.CreateView):
+    model = models.Cover
+    form_class = forms.CoverGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:cover-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Создать'
+        return context
+
+class UpdateCover(generic.UpdateView):
+    model = models.Cover
+    form_class = forms.CoverGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:cover-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Обновить'
+        return context
+
+class DeleteCover(generic.DeleteView):
+    model = models.Cover
+    template_name = 'referencies/delete.html'
+    success_url = reverse_lazy('referencies:cover-list')
+
+
+class ListAgeLimit(generic.ListView):
+    model = models.AgeLimit
+    template_name = 'referencies/list-al.html'
+
+class DetailAgeLimit(generic.DetailView):
+    model = models.AgeLimit
+    template_name = 'referencies/detail.html'
+
+class CreateAgeLimit(generic.CreateView):
+    model = models.AgeLimit
+    form_class = forms.AgeLimitGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:al-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Создать'
+        return context
+
+class UpdateAgeLimit(generic.UpdateView):
+    model = models.AgeLimit
+    form_class = forms.AgeLimitGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:al-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Обновить'
+        return context
+
+class DeleteAgeLimit(generic.DeleteView):
+    model = models.AgeLimit
+    template_name = 'referencies/delete.html'
+    success_url = reverse_lazy('referencies:al-list')
+
+
+
+class ListRate(generic.ListView):
+    model = models.Rate
+    template_name = 'referencies/list-rate.html'
+
+class DetailRate(generic.DetailView):
+    model = models.Rate
+    template_name = 'referencies/detail.html'
+
+class CreateRate(generic.CreateView):
+    model = models.Rate
+    form_class = forms.RateGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:rate-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Создать'
+        return context
+
+class UpdateRate(generic.UpdateView):
+    model = models.Rate
+    form_class = forms.RateGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:rate-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Обновить'
+        return context
+
+class DeleteRate(generic.DeleteView):
+    model = models.Rate
+    template_name = 'referencies/delete.html'
+    success_url = reverse_lazy('referencies:rate-list')

@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Удалить запись</title>
-</head>
-<body>
-    <h1>Удалить запись</h1>
-    <table border="1">
+{% extends "base.html" %}
+{% block title %}
+Удалить запись
+{% endblock title %}
+{% block body %}
+<h1>Удалить запись</h1>
+    <table class="table table-bordered border-primary">
         <tr>
             <td>Номер</td>
             <td>Имя</td>
@@ -23,8 +19,9 @@
     </table>
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" name="Удалить">
+        <button type="submit" class="btn btn-warning bi bi-trash-fill"></button>
     </form>
-
-</body>
-</html>
+{% endblock body %}
+{% block footer %}
+Footer for delete
+{% endblock footer %}

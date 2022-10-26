@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Описание записи</title>
-</head>
-<body>
-    <h1>Описание записи</h1>
-    <table border="1">
-        <tr>
-            <td>Номер</td>
-            <td>Имя</td>
-            <td>Описание</td>
-        </tr>
-        <tr>
-            <td> {{ object.pk }}</td>
-            <td> {{object.name }}</td>
-            <td> {{object.description }}</td>
-        </tr>
-
-    </table>
-
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}
+Запись
+{% endblock title %}
+{% block body %}
+<div class="row">
+    <div class="col-6"> 
+        <table class="table table-bordered border-primary">
+            <tr>
+                <th>Номер</td>
+                <th>Имя</td>
+                <th>Описание</td>
+            </tr>
+            <tr>
+                <td> {{ object.pk }}</td>
+                <td> {{ object.name }}</td>
+                <td> {{ object.description }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-6"></div>
+</div>
+{% endblock body %}
+{% block footer %}
+Footer for detail
+{% endblock footer %}

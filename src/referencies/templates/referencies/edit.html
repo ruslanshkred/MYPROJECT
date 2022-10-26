@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{operation_name}}</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{operation_name}}
+{% endblock title %}
+
+{% block body %}
+<div class="row">
+  <div class="col-6">
     <h1>{{operation_name}}</h1>
     <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="SUBMIT">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input type="submit" class="btn btn-success" value="Submit">
     </form>
+  </div>
+<div class="col-6"></div>
+{% endblock body %}
 
-</body>
-</html>
+{% block footer %}
+Footer for edit
+{% endblock footer %}
