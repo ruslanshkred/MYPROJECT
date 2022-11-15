@@ -1,295 +1,389 @@
 from . import models, forms
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class ListAuthor(generic.ListView):
+class ListAuthor(LoginRequiredMixin, generic.ListView):
     model = models.Author
-    template_name = 'referencies/list_author.html'
-
-class DetailAuthor(generic.DetailView):
-    model = models.Author   
-    template_name = 'referencies/detail.html'
-
-class CreateAuthor(generic.CreateView):
-    model = models.Author
-    form_class = forms.AuthorGroup
-    template_name = 'referencies/edit.html'
-    success_url = reverse_lazy('referencies:author-list')
-
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'List of Authors'
+        context['url_update_name'] = 'referencies:author-update'
+        context['url_delete_name'] = 'referencies:author-delete'
         return context
 
-class UpdateAuthor(generic.UpdateView):
+class DetailAuthor(LoginRequiredMixin, generic.DetailView):
     model = models.Author
+    login_url = reverse_lazy('login') 
+    template_name = 'referencies/detail.html'
+
+class CreateAuthor(LoginRequiredMixin, generic.CreateView):
+    model = models.Author
+    login_url = reverse_lazy('login')
     form_class = forms.AuthorGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:author-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Create'
+        return context
+
+class UpdateAuthor(LoginRequiredMixin, generic.UpdateView):
+    model = models.Author
+    login_url = reverse_lazy('login')
+    form_class = forms.AuthorGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:author-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Update'
         return context
     
-class DeleteAuthor(generic.DeleteView):
+class DeleteAuthor(LoginRequiredMixin, generic.DeleteView):
     model = models.Author
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:author-list')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Delete'
+        return context
 
-class ListSerie(generic.ListView):
-    model = models.Serie
-    template_name = 'referencies/list_serie.html'
 
-class DetailSerie(generic.DetailView):
+class ListSerie(LoginRequiredMixin, generic.ListView):
     model = models.Serie
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Series'
+        context['url_update_name'] = 'referencies:serie-update'
+        context['url_delete_name'] = 'referencies:serie-delete'
+        return context
+
+class DetailSerie(LoginRequiredMixin, generic.DetailView):
+    model = models.Serie
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateSerie(generic.CreateView):
+class CreateSerie(LoginRequiredMixin, generic.CreateView):
     model = models.Serie
+    login_url = reverse_lazy('login')
     form_class = forms.SerieGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:serie-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateSerie(generic.UpdateView):
+class UpdateSerie(LoginRequiredMixin, generic.UpdateView):
     model = models.Serie
+    login_url = reverse_lazy('login')
     form_class = forms.SerieGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:serie-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteSerie(generic.DeleteView):
+class DeleteSerie(LoginRequiredMixin, generic.DeleteView):
     model = models.Serie
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:serie-list')
 
 
-class ListGenrie(generic.ListView):
+class ListGenrie(LoginRequiredMixin, generic.ListView):
     model = models.Genrie
-    template_name = 'referencies/list_genrie.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Genries'
+        context['url_update_name'] = 'referencies:genrie-update'
+        context['url_delete_name'] = 'referencies:genrie-delete'
+        return context
 
-class DetailGenrie(generic.DetailView):
+class DetailGenrie(LoginRequiredMixin, generic.DetailView):
     model = models.Genrie
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateGenrie(generic.CreateView):
+class CreateGenrie(LoginRequiredMixin, generic.CreateView):
     model = models.Genrie
+    login_url = reverse_lazy('login')
     form_class = forms.GenrieGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:genrie-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateGenrie(generic.UpdateView):
+class UpdateGenrie(LoginRequiredMixin, generic.UpdateView):
     model = models.Genrie
+    login_url = reverse_lazy('login')
     form_class = forms.GenrieGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:genrie-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteGenrie(generic.DeleteView):
+class DeleteGenrie(LoginRequiredMixin, generic.DeleteView):
     model = models.Genrie
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:genrie-list')
 
 
 
-class ListPublishingHouse(generic.ListView):
+class ListPublishingHouse(LoginRequiredMixin, generic.ListView):
     model = models.PublishingHouse
-    template_name = 'referencies/list_ph.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Publishing Houses'
+        context['url_update_name'] = 'referencies:ph-update'
+        context['url_delete_name'] = 'referencies:ph-delete'
+        return context
 
-class DetailPublishingHouse(generic.DetailView):
+class DetailPublishingHouse(LoginRequiredMixin, generic.DetailView):
     model = models.PublishingHouse
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreatePublishingHouse(generic.CreateView):
+class CreatePublishingHouse(LoginRequiredMixin, generic.CreateView):
     model = models.PublishingHouse
+    login_url = reverse_lazy('login')
     form_class = forms.PublishingHouseGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:ph-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdatePublishingHouse(generic.UpdateView):
+class UpdatePublishingHouse(LoginRequiredMixin, generic.UpdateView):
     model = models.PublishingHouse
+    login_url = reverse_lazy('login')
     form_class = forms.PublishingHouseGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:ph-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeletePublishingHouse(generic.DeleteView):
+class DeletePublishingHouse(LoginRequiredMixin, generic.DeleteView):
     model = models.PublishingHouse
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:ph-list')
 
 
 
-class ListUnits(generic.ListView):
+class ListUnits(LoginRequiredMixin, generic.ListView):
     model = models.Units
-    template_name = 'referencies/list_units.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Units'
+        context['url_update_name'] = 'referencies:units-update'
+        context['url_delete_name'] = 'referencies:units-delete'
+        return context
 
-class DetailUnits(generic.DetailView):
+class DetailUnits(LoginRequiredMixin, generic.DetailView):
     model = models.Units
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateUnits(generic.CreateView):
+class CreateUnits(LoginRequiredMixin, generic.CreateView):
     model = models.Units
+    login_url = reverse_lazy('login')
     form_class = forms.UnitsGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:units-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateUnits(generic.UpdateView):
+class UpdateUnits(LoginRequiredMixin, generic.UpdateView):
     model = models.Units
+    login_url = reverse_lazy('login')
     form_class = forms.UnitsGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:units-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteUnits(generic.DeleteView):
+class DeleteUnits(LoginRequiredMixin, generic.DeleteView):
     model = models.Units
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:units-list')
 
 
-class ListCover(generic.ListView):
+class ListCover(LoginRequiredMixin, generic.ListView):
     model = models.Cover
-    template_name = 'referencies/list_cover.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Covers'
+        context['url_update_name'] = 'referencies:cover-update'
+        context['url_delete_name'] = 'referencies:cover-delete'
+        return context
 
-class DetailCover(generic.DetailView):
+class DetailCover(LoginRequiredMixin, generic.DetailView):
     model = models.Cover
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateCover(generic.CreateView):
+class CreateCover(LoginRequiredMixin, generic.CreateView):
     model = models.Cover
+    login_url = reverse_lazy('login')
     form_class = forms.CoverGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:cover-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateCover(generic.UpdateView):
+class UpdateCover(LoginRequiredMixin, generic.UpdateView):
     model = models.Cover
+    login_url = reverse_lazy('login')
     form_class = forms.CoverGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:cover-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteCover(generic.DeleteView):
+class DeleteCover(LoginRequiredMixin, generic.DeleteView):
     model = models.Cover
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:cover-list')
 
 
-class ListAgeLimit(generic.ListView):
+class ListAgeLimit(LoginRequiredMixin, generic.ListView):
     model = models.AgeLimit
-    template_name = 'referencies/list-al.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Age Limits'
+        context['url_update_name'] = 'referencies:al-update'
+        context['url_delete_name'] = 'referencies:al-delete'
+        return context
 
-class DetailAgeLimit(generic.DetailView):
+class DetailAgeLimit(LoginRequiredMixin, generic.DetailView):
     model = models.AgeLimit
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateAgeLimit(generic.CreateView):
+class CreateAgeLimit(LoginRequiredMixin, generic.CreateView):
     model = models.AgeLimit
+    login_url = reverse_lazy('login')
     form_class = forms.AgeLimitGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:al-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateAgeLimit(generic.UpdateView):
+class UpdateAgeLimit(LoginRequiredMixin, generic.UpdateView):
     model = models.AgeLimit
+    login_url = reverse_lazy('login')
     form_class = forms.AgeLimitGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:al-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteAgeLimit(generic.DeleteView):
+class DeleteAgeLimit(LoginRequiredMixin, generic.DeleteView):
     model = models.AgeLimit
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:al-list')
 
 
 
-class ListRate(generic.ListView):
+class ListRate(LoginRequiredMixin, generic.ListView):
     model = models.Rate
-    template_name = 'referencies/list-rate.html'
+    login_url = reverse_lazy('login')
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Rates'
+        context['url_update_name'] = 'referencies:rate-update'
+        context['url_delete_name'] = 'referencies:rate-delete'
+        return context
 
-class DetailRate(generic.DetailView):
+class DetailRate(LoginRequiredMixin, generic.DetailView):
     model = models.Rate
+    login_url = reverse_lazy('login')
     template_name = 'referencies/detail.html'
 
-class CreateRate(generic.CreateView):
+class CreateRate(LoginRequiredMixin, generic.CreateView):
     model = models.Rate
+    login_url = reverse_lazy('login')
     form_class = forms.RateGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:rate-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Создать'
+        context['operation_name'] = 'Create'
         return context
 
-class UpdateRate(generic.UpdateView):
+class UpdateRate(LoginRequiredMixin, generic.UpdateView):
     model = models.Rate
+    login_url = reverse_lazy('login')
     form_class = forms.RateGroup
     template_name = 'referencies/edit.html'
     success_url = reverse_lazy('referencies:rate-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['operation_name'] = 'Обновить'
+        context['operation_name'] = 'Update'
         return context
 
-class DeleteRate(generic.DeleteView):
+class DeleteRate(LoginRequiredMixin, generic.DeleteView):
     model = models.Rate
+    login_url = reverse_lazy('login')
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:rate-list')

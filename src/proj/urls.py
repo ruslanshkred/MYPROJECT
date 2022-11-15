@@ -17,12 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from homepage.views import HomePage
+
+from homepage import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('s-admin/', admin.site.urls),
+    #path('login/', auth_views.LoginView.as_view(template_name='homepage/login.html'), name='login'),
+    #path('register/', views.UserCreationForm, name = 'register'),
     path('ref/', include('referencies.urls', namespace='referencies')),
+    path('book/', include('books.urls', namespace='books')),
+    path('', HomePage.as_view(), name = 'home_page'),
+    path('accounts/', include('django.contrib.auth.urls'), name='login'),
+    path("signup/", views.SignUp.as_view(), name="signup"),
+
+
 ]
 
-#if settings.DEBUG:
-#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,12 +6,12 @@ from django.urls import reverse_lazy
 class Author(models.Model):
     name = models.CharField(
         max_length = 40,
-        verbose_name = 'Имя автора'
+        verbose_name = "Author's Name"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
 
     def __str__(self):
@@ -27,12 +27,12 @@ class Author(models.Model):
 class Serie(models.Model):
     name = models.CharField(
         max_length = 30,
-        verbose_name = "Серия"
+        verbose_name = "Serie"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -47,12 +47,12 @@ class Serie(models.Model):
 class Genrie(models.Model):
     name = models.CharField(
         max_length = 30,
-        verbose_name = "Жанр"
+        verbose_name = "Genrie"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -67,12 +67,12 @@ class Genrie(models.Model):
 class PublishingHouse(models.Model):
     name = models.CharField(
         max_length = 50,
-        verbose_name = "Издательство"
+        verbose_name = "Publishing House"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -87,12 +87,12 @@ class PublishingHouse(models.Model):
 class Units(models.Model):
     name = models.CharField(
         max_length = 10,
-        verbose_name = "Единицы измерения"
+        verbose_name = "Units"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -106,12 +106,12 @@ class Units(models.Model):
 class Cover(models.Model):
     name = models.CharField(
         max_length = 50,
-        verbose_name = "Переплет"
+        verbose_name = "Cover"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -125,12 +125,12 @@ class Cover(models.Model):
 class AgeLimit(models.Model):
     name = models.CharField(
         max_length = 10,
-        verbose_name = "Возрастные ограничения"
+        verbose_name = "Age Limits"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name
@@ -144,12 +144,12 @@ class AgeLimit(models.Model):
 class Rate(models.Model):
     name = models.CharField(
         max_length = 10,
-        verbose_name = "Рейтинг"
+        verbose_name = "Rate"
     )
     description = models.TextField(
         blank=True,
         null=True,
-        verbose_name = 'Описание'
+        verbose_name = 'Description'
     )
     def __str__(self):
         return self.name

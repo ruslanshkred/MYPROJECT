@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'referencies',
     'books',
+    'homepage',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-en'
 
 TIME_ZONE = 'Europe/Minsk'
 
@@ -125,8 +126,8 @@ STATIC_URL = 'static/'
 STATIC_ROOT = '/home/ruslanshkred/MYPROJECT/static'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = '/home/ruslanshkred/MYPROJECT/media'
-#MEDIA_ROOT = BASE_DIR / 'media'
+#MEDIA_ROOT = '/home/ruslanshkred/MYPROJECT/media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -134,3 +135,6 @@ MEDIA_ROOT = '/home/ruslanshkred/MYPROJECT/media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = 'home_page'
+LOGOUT_REDIRECT_URL = "home_page"

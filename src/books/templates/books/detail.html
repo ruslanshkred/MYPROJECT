@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 {% block title %}
 Details
 {% endblock title %}
@@ -10,12 +9,10 @@ Details
             <tr>
                 <th>Number</td>
                 <th>Name</td>
-                <th>Description</td>
             </tr>
             <tr>
                 <td> {{ object.pk }}</td>
                 <td> {{ object.name }}</td>
-                <td> {{ object.description }}</td>
             </tr>
         </table>
     </div>

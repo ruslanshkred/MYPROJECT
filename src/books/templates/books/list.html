@@ -1,18 +1,19 @@
 {% extends "base.html" %}
+
 {% block title %}
-Список переплетов
+{{operation_name}}
 {% endblock title %}
 {% block body %}
-<h1>Список обложек</h1>
+<h1>{{operation_name}}</h1>
 <div class="container">
     <div class="row">
     <div class="col-6"> 
         <table class="table table-bordered border-primary">
         {% for obj in object_list %}
             <tr>
-                <td><a href="{% url 'referencies:cover-update' pk=obj.pk %}">{{ obj.pk }}</a> </td>
-                <td> {{obj.name}} </td>
-                <td><a href="{% url 'referencies:cover-delete' pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a> </td>
+                <td><a href="{% url url_update_name pk=obj.pk %}">{{ obj.pk }}</a> </td>
+                <td> {{ obj.name }} </td>
+                <td><a href="{% url url_delete_name pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a> </td>
             </tr>
         {% endfor %}
         </table>
@@ -22,5 +23,5 @@
 
 {% endblock body %}
 {% block footer %}
-Footer for cover-list
+Footer for author-list
 {% endblock footer %}

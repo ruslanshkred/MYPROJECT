@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
-
 {% block title %}
 Delete
 {% endblock title %}
@@ -10,12 +8,10 @@ Delete
         <tr>
             <td>Number</td>
             <td>Name</td>
-            <td>Description</td>
         </tr>
         <tr>
             <td> {{ object.pk }}</td>
             <td> {{ object.name }}</td>
-            <td> {{ object.description }}</td>
         </tr>
 
     </table>

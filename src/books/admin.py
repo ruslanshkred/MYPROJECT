@@ -9,10 +9,9 @@ from . import models
 class BookAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
+        'name',
         'logo',
         'price',
-        #'book_author',
-        #'book_genrie',
         'book_year',
         'book_pages',
         'book_cover',
