@@ -16,17 +16,59 @@ Home page
     {% endif %}
 </div>
 
-
-<div class="card" style="width: 18rem;">
-    <img src="{{ photo1.logo.url }}" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{ photo1.name }}</h5>
-        <p class="card-text">{{ obj.name }}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="container">
+    <h1>New in catalogue</h1>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img src="{{ photo1.logo.url }}" class="card-img-top" alt="..." height="230px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo1.name }}</h5>
+                    <p class="card-text">{{ photo1.obj.name }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ photo2.logo.url }}" class="card-img-top" alt="..." height="230px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo2.name }}</h5>
+                    <p class="card-text">{{ photo2.obj.name }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>    
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ photo3.logo.url }}" class="card-img-top" alt="..."height="230px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo3.name }}</h5>
+                    <p class="card-text">{{ photo3.obj.name }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>    
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ photo4.logo.url }}" class="card-img-top" alt="..."height="230px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo4.name }}</h5>
+                    <p class="card-text">{{ photo4.obj.name }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>    
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ photo5.logo.url }}" class="card-img-top" alt="..."height="230px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo5.name }}</h5>
+                    <p class="card-text">{{ photo5.obj.name }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>    
+        </div>
     </div>
 </div>
 {% endblock body %}
-
-{% block footer %}
-Footer for author-list
-{% endblock footer %}

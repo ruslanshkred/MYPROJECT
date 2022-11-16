@@ -8,19 +8,20 @@ from django.contrib.auth.models import User
 from django import forms
 from django.views import generic
 from django.urls import reverse_lazy
+from . import forms
 
 # Create your views here
-def user_login(request):
-    if request.method == 'GET':
-        return render(request, 'homepage/login.html', context={})
-    if request.method == 'POST':
-        user = authenticate(
-            request=request,
-            user_name = request.POST.get('login'),
-            password = request.POST.get('password')
-            )
-        if user is not None:
-            login(request, user)
+#def user_login(request):
+#    if request.method == 'GET':
+#        return render(request, 'homepage/login.html', context={})
+ #   if request.method == 'POST':
+ #       user = authenticate(
+ #           request=request,
+ #           user_name = request.POST.get('login'),
+ #           password = request.POST.get('password')
+ #           )
+  #      if user is not None:
+ #           login(request, user)
 
 class Register(generic.CreateView):
     form_class = UserCreationForm
@@ -28,7 +29,7 @@ class Register(generic.CreateView):
     success_url = reverse_lazy('home')
 
 class SignUp(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = forms.RegisterForm
     success_url = reverse_lazy('login')
     template_name = "homepage/signup.html"
 
@@ -36,9 +37,10 @@ class HomePage(generic.TemplateView):
     template_name = 'homepage/home_page.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        atm = models.Book.objects.order_by('-book_input_in_catalog')[0]
-        context['photo1'] = models.Book.objects.get(pk=atm.pk)     
-        print(atm.pk)
+
+        for i in range(3):
+            atm = models.Book.objects.order_by('-book_input_in_catalog')[i]
+            context[f'photo{i+1}'] = models.Book.objects.get(pk=atm.pk)
         return context
 
 
