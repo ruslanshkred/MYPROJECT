@@ -38,7 +38,7 @@ class HomePage(generic.TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 
-        for i in range(3):
+        for i in range(5):
             atm = models.Book.objects.order_by('-book_input_in_catalog')[i]
             context[f'photo{i+1}'] = models.Book.objects.get(pk=atm.pk)
         return context
