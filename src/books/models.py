@@ -21,11 +21,11 @@ class Book(models.Model):
         decimal_places = 2,
         verbose_name = 'Price, BYN'
     )
-    book_author = models.ManyToManyField(
+    book_author = models.ForeignKey(
         'referencies.Author',
-        verbose_name = 'Authors',
-        blank=True,
-        related_name='book_authors'
+        verbose_name = 'Author',
+        default=1,
+        on_delete=models.PROTECT
     )
 
     book_serie = models.ForeignKey(
@@ -34,11 +34,11 @@ class Book(models.Model):
         verbose_name = 'Serie',
     )
 
-    book_genrie = models.ManyToManyField(
+    book_genrie = models.ForeignKey(
         'referencies.Genrie',
         verbose_name = 'Genrie',
-        blank=True,
-        related_name='book_genriess'
+        on_delete=models.PROTECT,
+        default=1
     )
 
     book_year = models.PositiveIntegerField(

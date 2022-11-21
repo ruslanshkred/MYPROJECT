@@ -101,7 +101,7 @@ class Units(models.Model):
         return self.name
         
     def get_absolute_url(self):
-        return reverse_lazy('author-list', kwargs={'units': self.pk})
+        return reverse_lazy('units-list', kwargs={'units': self.pk})
 
 class Cover(models.Model):
     name = models.CharField(

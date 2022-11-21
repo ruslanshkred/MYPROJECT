@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block body %}
+<h2>User profile</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{form | crispy }}
+ 
+    <input type="submit" value="Register">
+</form>
+
+<a href="{% url 'login' %}">Back to login</a>
+<a href="{% url 'home_page' %}">Back to Home</a>
+{% endblock body %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Delete
+{% endblock title %}
+{% block body %}
+<h1>Delete</h1>
+    <table class="table table-bordered border-primary">
+        <tr>
+            <td>Number</td>
+            <td>Name</td>
+        </tr>
+        <tr>
+            <td> {{ object.pk }}</td>
+            <td> {{ object.user }}</td>
+        </tr>
+
+    </table>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning bi bi-trash-fill"></button>
+    </form>
+{% endblock body %}

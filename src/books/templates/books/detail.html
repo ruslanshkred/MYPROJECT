@@ -1,21 +1,30 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block title %}
 Details
 {% endblock title %}
 {% block body %}
-<div class="row">
-    <div class="col-6"> 
-        <table class="table table-bordered border-primary">
-            <tr>
-                <th>Number</td>
-                <th>Name</td>
-            </tr>
-            <tr>
-                <td> {{ object.pk }}</td>
-                <td> {{ object.name }}</td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-6"></div>
+
+
+<div class="col-4">
+
+    <img src="{{ object.logo.url }}" class="card-img-top" alt="..."  >
+
+    
+    <p><strong>Name:</strong> {{ object.name }}</p>
+    <p><strong>Author:</strong> {{ object.book_author }}</p>
+    <p><strong>Price, BYN:</strong> {{ object.price }}</p>
+    <p><strong>Serie:</strong> {{ object.book_serie }}</p>
+    <p><strong>Genrie:</strong> {{ object.book_genrie }}</p>
+    <p><strong>Year of publishing:</strong> {{ object.book_year }}</p>
+    <p><strong>Number of pages:</strong> {{ object.book_pages }}</p>
+    <p><strong>Cover:</strong> {{ object.book_cover }}</p>
+    <p><strong>Format:</strong> {{ object.book_format }}</p>
+    <p><strong>ISBN:</strong> {{ object.book_isbn }}</p>
+    <p><strong>Mass:</strong> {{ object.book_mass }}</p>
+    <p><strong>Age limits:</strong> {{ object.book_age_limits }}</p>
+    <p><strong>Publishing House:</strong> {{ object.book_ph }}</p>
+
 </div>
 {% endblock body %}

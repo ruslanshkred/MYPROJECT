@@ -26,10 +26,10 @@
                   <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Catalogue</a>
+                  <a class="nav-link" href="{% url 'books:book-list' %}">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Terms of delivery</a>
+                  <a class="nav-link" href="{% url 'homepage:delivery' %}">Terms of delivery</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Cart</a>
@@ -44,8 +44,21 @@
         </nav>
       </header>
       <!-- Begin page content -->
+
+
+
     <main class="flex-shrink-0">
+
+    
         <div class="container">
+            <div align='right'>
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a href="{% url 'homepage:signup' %}">Sign Up</a>
+                <a href="{% url 'login' %}">Login</a>
+              {% endif %}
+    </div>
             {% block body %}
             No content
             {% endblock body %}

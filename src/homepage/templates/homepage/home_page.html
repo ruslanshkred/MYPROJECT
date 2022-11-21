@@ -7,14 +7,14 @@ Home page
 {% block body %}
 
 
-<div align='right'>
+{% comment %} <div align='right'>
     {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
-        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'homepage:signup' %}">Sign Up</a>
         <a href="{% url 'login' %}">Login</a>
     {% endif %}
-</div>
+</div> {% endcomment %}
 
 <div class="container">
     <h1>New in catalogue</h1>
@@ -25,7 +25,7 @@ Home page
                 <div class="card-body">
                     <h5 class="card-title">{{ photo1.name }}</h5>
                     <p class="card-text">{{ photo1.obj.name }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'books:book-detail' pk=photo1.pk %}" class="btn btn-primary">Look frought details</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@ Home page
                 <div class="card-body">
                     <h5 class="card-title">{{ photo2.name }}</h5>
                     <p class="card-text">{{ photo2.obj.name }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'books:book-detail' pk=photo2.pk %}" class="btn btn-primary">Look frought details</a>
                 </div>
             </div>    
         </div>
@@ -45,7 +45,7 @@ Home page
                 <div class="card-body">
                     <h5 class="card-title">{{ photo3.name }}</h5>
                     <p class="card-text">{{ photo3.obj.name }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'books:book-detail' pk=photo3.pk %}" class="btn btn-primary">Look frought details</a>
                 </div>
             </div>    
         </div>
@@ -55,7 +55,7 @@ Home page
                 <div class="card-body">
                     <h5 class="card-title">{{ photo4.name }}</h5>
                     <p class="card-text">{{ photo4.obj.name }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'books:book-detail' pk=photo4.pk %}" class="btn btn-primary">Look frought details</a>
                 </div>
             </div>    
         </div>
@@ -65,7 +65,7 @@ Home page
                 <div class="card-body">
                     <h5 class="card-title">{{ photo5.name }}</h5>
                     <p class="card-text">{{ photo5.obj.name }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{% url 'books:book-detail' pk=photo5.pk %}" class="btn btn-primary">Look frought details</a>
                 </div>
             </div>    
         </div>

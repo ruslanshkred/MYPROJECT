@@ -18,8 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from homepage.views import HomePage
-
 from homepage import views
+from portal import views
 
 
 urlpatterns = [
@@ -30,8 +30,10 @@ urlpatterns = [
     path('book/', include('books.urls', namespace='books')),
     path('', HomePage.as_view(), name = 'home_page'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
-    path("signup/", views.SignUp.as_view(), name="signup"),
-
+ #   path("signup/", views.SignUp.as_view(), name="signup"),
+    path('home/', include('homepage.urls', namespace='homepage')),
+ #   path('profile/', views.Profile.as_view(), name='profile')
+    path('portal/', include('portal.urls', namespace='portal'))
 
 ]
 
