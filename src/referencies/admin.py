@@ -19,7 +19,10 @@ class AgeLimitAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'description')
 class RateAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'description')
+class StatusAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name', 'description')
 
+admin.site.register(models.Status, StatusAdmin)
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Serie, SerieAdmin)
 admin.site.register(models.Genrie, GenrieAdmin)

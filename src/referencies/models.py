@@ -159,3 +159,22 @@ class Rate(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('rate-list', kwargs={'pk': self.pk})
+
+class Status(models.Model):
+    name = models.CharField(
+        max_length = 150,
+        verbose_name = "Status"
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name = 'Description'
+    )
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy('status-list', kwargs={'pk': self.pk})

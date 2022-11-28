@@ -33,7 +33,9 @@ urlpatterns = [
  #   path("signup/", views.SignUp.as_view(), name="signup"),
     path('home/', include('homepage.urls', namespace='homepage')),
  #   path('profile/', views.Profile.as_view(), name='profile')
-    path('portal/', include('portal.urls', namespace='portal'))
+    path('portal/', include('portal.urls', namespace='portal')),
+    path('orders/', include('orders.urls', namespace='orders'))
+
 
 ]
 

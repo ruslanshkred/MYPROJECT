@@ -16,6 +16,14 @@
                 {% endif %}
                 <td> <a href="{% url url_detail_name pk=obj.pk %}">{{ obj.name }}</a> </td>
                 <td> {{ obj.price }} </td>
+                <td>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ obj.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </td>
                 {% if perms.books.delete_book %}
                 <td><a href="{% url url_delete_name pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a> </td>
                 {% endif %}            

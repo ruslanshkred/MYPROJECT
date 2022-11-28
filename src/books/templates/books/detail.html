@@ -27,4 +27,10 @@ Details
     <p><strong>Publishing House:</strong> {{ object.book_ph }}</p>
 
 </div>
+<form action="{% url 'orders:show-cart' %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="quantity" value="1" step="1" min="1">
+    <input type="hidden" name="book_pk" value="{{ object.pk }}">
+    <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
 {% endblock body %}

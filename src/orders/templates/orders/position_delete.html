@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Delete position
+{% endblock title %}
+
+{% block body %}
+<h1>Are you sure? Do you want to delete {{ object.book.name }}?</h1>
+
+<form method='post'>
+    {% csrf_token %}
+    <button type='submit' class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+</form>
+
+
+{% endblock body %}

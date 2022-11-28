@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}    
+
+{% block title %}
+View cart
+{% endblock title %}
+
+{% block body %}
+<h1>My Cart</h1>
+<table class='table'>
+    <tr>
+        <td>Name</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Price per position</td>
+        <td></td>
+    </tr>
+    {% for book_in_cart in cart.books.all %}
+
+    <tr>
+        <td>{{ book_in_cart.book.name }}</td>
+        <td>{{ book_in_cart.quantity }}</td>
+        <td>{{ book_in_cart.book.price }}</td>
+        <td>{{ book_in_cart.price_per_position }}</td>
+        <td><a href="{% url 'orders:del-position' book_in_cart.pk %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a> </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td><h5>The total costs of the goods in the cart</h5></td>
+        <td></td>
+        <td></td>
+        <td><h5>{{ cart.total_costs }}</h5></td>
+        <td></td>
+    </tr>
+</table>
+
+<form action="{% url 'orders:create-order' %}" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Create order</button>
+</form>
+
+
+{% endblock body %}

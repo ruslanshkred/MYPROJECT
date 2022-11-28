@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'referencies',
     'books',
     'homepage',
-    'portal'
+    'portal',
+    'orders'
 ]
 
 MIDDLEWARE = [
