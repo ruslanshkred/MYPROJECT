@@ -25,6 +25,7 @@ class Book(models.Model):
         'referencies.Author',
         verbose_name = 'Author',
         default=1,
+        related_name='books',
         on_delete=models.PROTECT
     )
 
@@ -32,13 +33,15 @@ class Book(models.Model):
         'referencies.Serie',
         on_delete = models.PROTECT,
         verbose_name = 'Serie',
+        related_name='books'
     )
 
     book_genrie = models.ForeignKey(
         'referencies.Genrie',
         verbose_name = 'Genrie',
         on_delete=models.PROTECT,
-        default=1
+        default=1,
+        related_name='books',
     )
 
     book_year = models.PositiveIntegerField(
@@ -77,6 +80,7 @@ class Book(models.Model):
         'referencies.PublishingHouse',
         on_delete = models.PROTECT,
         verbose_name = 'Publishing House',
+        related_name='books',
     )
 
     books_in_stock = models.IntegerField(

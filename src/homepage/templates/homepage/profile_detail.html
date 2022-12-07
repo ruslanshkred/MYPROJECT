@@ -5,26 +5,70 @@ My Profile Details
 {% endblock title %}
 {% block body %}
 <div class="row">
-
-    <div class="col-6"> 
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form | crispy }}
-
-        </form>
+<h1>My profile</h1>
+    <div> 
         <table class="table table-bordered border-primary">
-                <tr>
-                <th>Number</td>
-                <th>Name</td>
-                <th>Description</td>
+            <tr>
+                <th>Login</th>
+                <td> {{ user }}</td>
             </tr>
             <tr>
-                <td> {{ object.pk }}</td>
-                <td> {{ object.name }}</td>
-                <td> {{ object.description }}</td>
+                <th>Password</td>
+                <td> {{ user.password }}</td>
             </tr>
-        </table>
+            <tr>
+                <th>E-mail</td>
+                <td> {{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>First Name</td>
+                <td> {{ user.profile.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</td>
+                <td> {{ user.profile.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Phone Number</td>
+                <td> {{ user.profile.phone }}</td>
+            </tr>
+            <tr>
+                <th>Group</td>
+                <td> {% for group in user.groups.all %}
+                    {{ group.name }}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Home address:<br>Country</td>
+                <td> {{ user.profile.home_country }}</td>
+            </tr>
+            <tr>
+                <th>City</td>
+                <td> {{ user.profile.home_city }}</td>
+            </tr>
+            <tr>
+                <th>Index</td>
+                <td> {{ user.profile.home_index }}</td>
+            </tr>
+            <tr>
+                <th>Address1</td>
+                <td> {{ user.profile.home_address1 }}</td>
+            </tr>
+            <tr>
+                <th>Address2</td>
+                <td> {{ user.profile.home_address2 }}</td>
+            </tr>
+            <tr>
+                <th>Additional Info</td>
+                <td> {{ user.profile.additional_info }}</td>
+            </tr>
+         </table>
     </div>
-    <div class="col-6"></div>
+        <form action="{% url 'homepage:profile-update' pk=user.profile.pk %}" method="get">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success" value="Update">
+        </form>
 </div>
 {% endblock body %}

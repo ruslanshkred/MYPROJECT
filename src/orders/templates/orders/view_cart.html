@@ -6,10 +6,15 @@ View cart
 {% endblock title %}
 
 {% block body %}
+
+{% if cart %}
+
 <h1>My Cart</h1>
+
 <table class='table'>
     <tr>
         <td>Name</td>
+        <td>Update quantity</td>
         <td>Quantity</td>
         <td>Price</td>
         <td>Price per position</td>
@@ -19,6 +24,14 @@ View cart
 
     <tr>
         <td>{{ book_in_cart.book.name }}</td>
+        <td>
+            <form action="{% url 'orders:upd-position' book_in_cart.pk %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ book_in_cart.quantity }}" max="50" step="1" min="1">
+                <input type="hidden" name="book_pk" value="{{ book_in_cart.book.pk }}">
+                <button type="submit" class="btn btn-success">Update</button>
+            </form>
+        </td>
         <td>{{ book_in_cart.quantity }}</td>
         <td>{{ book_in_cart.book.price }}</td>
         <td>{{ book_in_cart.price_per_position }}</td>
@@ -27,6 +40,7 @@ View cart
     {% endfor %}
     <tr>
         <td><h5>The total costs of the goods in the cart</h5></td>
+        <td></td>
         <td></td>
         <td></td>
         <td><h5>{{ cart.total_costs }}</h5></td>
@@ -39,6 +53,8 @@ View cart
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Create order</button>
 </form>
-
+{% else %}
+<h1>Your cart is empty</h1>
+{% endif %}
 
 {% endblock body %}

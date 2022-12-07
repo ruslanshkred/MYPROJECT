@@ -403,3 +403,54 @@ class DeleteRate(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'referencies.delete_rate'
     template_name = 'referencies/delete.html'
     success_url = reverse_lazy('referencies:rate-list')
+
+
+
+
+class ListStatus(PermissionRequiredMixin, generic.ListView):
+    model = models.Status
+    permission_required = 'referencies.view_status'
+    template_name = 'referencies/list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Statuses'
+        context['url_update_name'] = 'referencies:status-update'
+        context['url_delete_name'] = 'referencies:status-delete'
+        context['url_create_name'] = 'referencies:status-create'
+        context['operation_for_add'] = 'Add new Status'
+        return context
+
+class DetailStatus(PermissionRequiredMixin, generic.DetailView):
+    model = models.Status
+    permission_required = 'referencies.view_status'
+    template_name = 'referencies/detail.html'
+
+class CreateStatus(PermissionRequiredMixin, generic.CreateView):
+    model = models.Status
+    permission_required = 'referencies.add_status'
+    form_class = forms.StatusGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:status-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Create'
+        return context
+
+class UpdateStatus(PermissionRequiredMixin, generic.UpdateView):
+    model = models.Status
+    permission_required = 'referencies.change_status'
+    form_class = forms.StatusGroup
+    template_name = 'referencies/edit.html'
+    success_url = reverse_lazy('referencies:status-list')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'Update'
+        return context
+
+class DeleteStatus(PermissionRequiredMixin, generic.DeleteView):
+    model = models.Status
+    permission_required = 'referencies.delete_status'
+    template_name = 'referencies/delete.html'
+    success_url = reverse_lazy('referencies:status-list')

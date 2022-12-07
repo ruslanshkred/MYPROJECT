@@ -5,85 +5,20 @@
 {{operation_name}}
 {% endblock title %}
 {% block body %}
-
+<div class="nav-scroller bg-body shadow-sm">
+  <nav class="nav" aria-label="Secondary navigation">
+    <a class="nav-link" href="{% url 'orders:list-allorder' %}">Orders</a>
+    <a class="nav-link" href="{% url 'books:book-list' %}">Books</a>
+    <a class="nav-link" href="{% url 'referencies:author-list' %}">Authors</a>
+    <a class="nav-link" href="{% url 'referencies:serie-list' %}">Series</a>
+    <a class="nav-link" href="{% url 'referencies:genrie-list' %}">Genries</a>
+    <a class="nav-link" href="{% url 'referencies:ph-list' %}">Publishing Houses</a>
+    <a class="nav-link" href="{% url 'referencies:cover-list' %}">Covers</a>
+    <a class="nav-link" href="{% url 'referencies:al-list' %}">Age Limits</a>
+    <a class="nav-link" href="{% url 'referencies:rate-list' %}">Rates</a>
+    <a class="nav-link" href="{% url 'referencies:status-list' %}">Statuses</a>
+  </nav>
+</div>
 <h1>ADMINISTRATIVE PORTAL</h1>
-<br>
-<h2>Choose to edit </h2>
-
-<div class="list-group w-auto">
-    <a href="{% url 'books:book-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">List of Books</h3>
-                <p class="mb-0 opacity-75">Click to look for book cards.</p>
-            </div>
-           
-        </div>
-    </a>
-    <a href="{% url 'referencies:author-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Authors</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Authors.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:serie-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Serie</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Series.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:genrie-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Genrie</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Genries.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:ph-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Publishing Houses</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Publishing Houses.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:units-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Units</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Units.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:cover-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Cover</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Covers.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:al-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Age Limits</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Age Limits.</p>
-            </div>
-        </div>
-    </a>
-    <a href="{% url 'referencies:rate-list' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-        <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-                <h3 class="mb-0">Reference Rates</h3>
-                <p class="mb-0 opacity-75">Click to look for list of Rates.</p>
-            </div>
-        </div>
-    </a>
-
 
 {% endblock body %}

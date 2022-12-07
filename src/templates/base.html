@@ -9,6 +9,8 @@
     <link href="{% static 'bs/css/custom.css' %}" rel="stylesheet">
     <link href="{% static 'icons/bootstrap-icons.css' %}" rel="stylesheet">
     <script src="{% static 'bs/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bs/js/bootstrap.bundle.min.js' %}"></script>
+
     <title>{% block title %}GOOD BOOKS{% endblock title %} </title>
 </head>
 <body class="d-flex flex-column h-100">
@@ -25,8 +27,14 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'books:book-list' %}">Catalogue</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Catalogue</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'books:book-show' %}">All books</a></li>
+                    <li><a class="dropdown-item" href="{% url 'books:book-detective' %}">Detectives</a></li>
+                    <li><a class="dropdown-item" href="{% url 'books:book-fantastic' %}">Fantastic</a></li>
+                    <li><a class="dropdown-item" href="{% url 'books:book-novel' %}">Novels</a></li>
+                  </ul>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'homepage:delivery' %}">Terms of delivery</a>
@@ -34,14 +42,49 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'orders:show-cart' %}">Cart</a>
                 </li>
-                <li class="nav-item">
-                  {% if perms.books.change_book %}
-                    <a class="nav-link" href="{% url 'portal:portal' %}">Portal</a>
-                  {% endif %}
+
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Hello {{user.username}}</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'homepage:profile-detail' pk=user.pk %}">My profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
+                    <li><a class="dropdown-item" href="{% url 'orders:list-order' %}">My orders</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                  </ul>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'homepage:signup' %}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+
+                {% if perms.books.change_book %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Administrative portal</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'orders:list-allorder' %}">Orders</a></li>
+                    <li><a class="dropdown-item" href="{% url 'books:book-list' %}">Books</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:author-list' %}">Authors</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:serie-list' %}">Series</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:genrie-list' %}">Genries</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:ph-list' %}">Publishing Houses</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:cover-list' %}">Covers</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:al-list' %}">Age Limits</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:rate-list' %}">Rates</a></li>
+                    <li><a class="dropdown-item" href="{% url 'referencies:status-list' %}">Statuses</a></li>
+                  </ul>
+                </li>
+                {% endif %}
+
+                
               </ul>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+              <form action="{% url 'homepage:search-results' %}" class="d-flex" role="search" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form>
             </div>
@@ -56,14 +99,7 @@
 
     
         <div class="container">
-            <div align='right'>
-              {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
-              {% else %}
-                <a href="{% url 'homepage:signup' %}">Sign Up</a>
-                <a href="{% url 'login' %}">Login</a>
-              {% endif %}
-    </div>
+  
             {% block body %}
             No content
             {% endblock body %}

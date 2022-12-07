@@ -43,3 +43,8 @@ class RateGroup(forms.ModelForm):
     class Meta:
         model = models.Rate
         fields = ['name', 'description']
+
+class StatusGroup(forms.ModelForm):
+    class Meta:
+        model = models.Status
+        fields = ['name', 'description']

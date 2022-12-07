@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+ 
+All the orders
+{% endblock title %}
+{% block body %}
+<h1>List of orders</h1>
+<div class="container">
+    <div class="row">
+
+        <table class="table table-bordered border-primary">
+            <tr>
+                <th>Order number</th>
+                <th>Status</th>
+                <th>Customer</th>
+                <th>Date of creation</th>
+                <th>Total costs</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Additional info</th>
+             
+            </tr>
+
+            {% for obj in object_list %}
+            <tr>
+                <td><a href="{% url url_detail_name pk=obj.pk %}">{{ obj.pk }}</a></td>
+                <td>{{ obj.status }}</td>
+                <td>{{ obj.cart.user.profile.first_name }}</td>
+                <td>{{ obj.created_date }}</td>
+                <td>{{ obj.cart.total_costs }}</td>
+                <td>{{ obj.phone }}</td>
+                <td>{{ obj.address }}</td>
+                <td>{{ obj.additional_info }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+ </div>
+
+{% endblock body %}

@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import DeleteView, CreateView, TemplateView
+from django.views.generic import DeleteView, CreateView, TemplateView, UpdateView, DetailView, ListView, FormView
 from django.urls import reverse_lazy
 from . import models, forms
 from books import models as book_models
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 
@@ -53,22 +53,28 @@ def show_cart(request):
     return render(
         request = request,
         template_name='orders/view_cart.html',
-        context = context
+        context = context,
+        
     )
 
 
-class DelPosition(DeleteView):
+class DelPosition(UserPassesTestMixin, DeleteView):
     model = models.BookInCart
     success_url = reverse_lazy('orders:show-cart')
     template_name='orders/position_delete.html'
-    # def test_func(request):
-    #     book_in_cart = models.BookInCart.objects.get(pk=id)
-    #     cart_id = request.session.get('cart_id')
-    #     if cart_id == book_in_cart.id
-    #     book_in_cart == request.session.pk
-    #      = request.POST.get('book_in_cart')
-    #     return self.id == int(self.request.session.cart_id)
-#        return self.request.user == self.request.session.cart_pk
+    def test_func(self):
+        cart_id = self.request.session.get('cart_id')
+        cart = models.Cart.objects.get(pk=cart_id)
+        the_good_to_be_deleted = self.get_object() #objects_list если много объектов
+        goods = cart.books.filter(pk=the_good_to_be_deleted.pk) #товары в корзинке, выборка
+        return goods
+
+class UpdatePosition(UpdateView):
+    model = models.BookInCart
+    success_url = reverse_lazy('orders:show-cart')
+    fields = ('quantity',)
+
+
 
 class Order(CreateView):
     template_name = 'orders/create_order.html'
@@ -87,3 +93,54 @@ class Order(CreateView):
 
 class OrderSuccess(TemplateView):
     template_name = 'orders/success-order.html'
+
+class OrderDetail(LoginRequiredMixin, DetailView):
+    template_name = 'orders/detail-order.html'
+    model = models.Order
+    login_url = reverse_lazy('login')
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['url_update_order'] = 'orders:update-order'
+        context['url_update_bic'] = 'orders:update-bic'
+        return context
+
+class OrderList(LoginRequiredMixin, ListView):
+    model = models.Order
+    template_name = 'orders/list-order.html'
+    login_url = reverse_lazy('login')
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['my_orders'] = models.Order.objects.filter(cart__user=self.request.user)
+        context['url_delete_name'] = 'orders:delete-order'
+        context['url_detail_name'] = 'orders:detail-order'
+        return context
+
+class OrderAllList(LoginRequiredMixin, ListView):
+    model = models.Order
+    template_name = 'orders/list-all-order.html'
+    login_url = reverse_lazy('login')
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['url_detail_name'] = 'orders:detail-order'
+        context['url_update_name'] = 'orders:update-order'
+        return context
+
+class DelOrder(LoginRequiredMixin, DeleteView):
+    model = models.Order
+    success_url = reverse_lazy('orders:list-order')
+    template_name='orders/order_delete.html'
+    login_url = reverse_lazy('login')
+
+class UpdateOrder(UpdateView):
+    model = models.Order
+    form_class = forms.OrderUpdateForm
+    template_name = 'orders/order_update.html'
+    success_url = reverse_lazy('orders:list-order')
+
+
+
+class UpdateBookInCart(UpdateView):
+    model = models.BookInCart
+    form_class = forms.BookInCartForm
+    template_name = 'orders/order_update.html'
+    success_url = reverse_lazy('orders:list-order')

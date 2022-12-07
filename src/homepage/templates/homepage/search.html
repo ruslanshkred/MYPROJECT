@@ -1,18 +1,14 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
-Home page
+{{operation_name}}
 {% endblock title %}
 
 {% block body %}
-
-
-<div class="container">
-    <h1>New in catalogue</h1>
-    
     <div class='row'>
-        {% for obj in five_lasts %}
-        <div class="col">
+        {% for obj in object_list %}
+        <div class="col-3" >
             <div class="card">
                 <img src="{{ obj.logo.url }}" class="card-img-top" alt="..." height="300">
                 <div class="card-body">
@@ -29,6 +25,4 @@ Home page
         </div>
         {% endfor %}
     </div>
-    
-
 {% endblock body %}

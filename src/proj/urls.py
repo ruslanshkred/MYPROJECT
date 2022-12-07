@@ -17,22 +17,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from homepage.views import HomePage
-from homepage import views
-from portal import views
+
 
 
 urlpatterns = [
     path('s-admin/', admin.site.urls),
-    #path('login/', auth_views.LoginView.as_view(template_name='homepage/login.html'), name='login'),
-    #path('register/', views.UserCreationForm, name = 'register'),
     path('ref/', include('referencies.urls', namespace='referencies')),
     path('book/', include('books.urls', namespace='books')),
     path('', HomePage.as_view(), name = 'home_page'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
- #   path("signup/", views.SignUp.as_view(), name="signup"),
+    path('accounts/password-change/', auth_views.PasswordChangeView.as_view(template_name='homepage/password_change_form.html'), name='password_change'),
+    path('accounts/password-change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='homepage/password_change_done.html'), name='password_change_done'),
+
+
+
+
     path('home/', include('homepage.urls', namespace='homepage')),
- #   path('profile/', views.Profile.as_view(), name='profile')
     path('portal/', include('portal.urls', namespace='portal')),
     path('orders/', include('orders.urls', namespace='orders'))
 

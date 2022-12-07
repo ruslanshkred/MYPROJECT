@@ -50,4 +50,10 @@ urlpatterns=[
     path('rate-create/', views.CreateRate.as_view(), name='rate-create'),
     path('rate-update/<int:pk>/', views.UpdateRate.as_view(), name='rate-update'),
     path('rate-delete/<int:pk>/', views.DeleteRate.as_view(), name='rate-delete'),
-]
+
+    path('status/', views.ListStatus.as_view(), name='status-list'),
+    path('status/<int:pk>/', views.DetailStatus.as_view(), name='status-detail'),
+    path('status-create/', views.CreateStatus.as_view(), name='status-create'),
+    path('status-update/<int:pk>/', views.UpdateStatus.as_view(), name='status-update'),
+    path('status-delete/<int:pk>/', views.DeleteStatus.as_view(), name='status-delete'),
+] 

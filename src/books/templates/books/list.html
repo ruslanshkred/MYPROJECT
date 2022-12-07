@@ -7,14 +7,30 @@
 <h1>{{operation_name}}</h1>
 <div class="container">
     <div class="row">
-    <div class="col-6"> 
+    <div> 
         <table class="table table-bordered border-primary">
-        {% for obj in object_list %}
+            <tr>
+                {% if perms.books.change_book %}
+                <th>ID number</th>
+                {% endif %}
+                <th>Logo</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Add to cart</th>
+                {% if perms.books.change_book %}
+                <th>Delete</th>
+                {% endif %}
+            </tr>
+            {% for obj in object_list %}
             <tr>
                 {% if perms.books.change_book %}
                 <td><a href="{% url url_update_name pk=obj.pk %}">{{ obj.pk }}</a> </td>
                 {% endif %}
+                <td> <img src="{{ obj.logo.url }}" width="100" height="100"  alt="..."  > </td>
                 <td> <a href="{% url url_detail_name pk=obj.pk %}">{{ obj.name }}</a> </td>
+                <td> {{ obj.book_author }} </td>
+
                 <td> {{ obj.price }} </td>
                 <td>
                     <form action="{% url 'orders:show-cart' %}" method="post">

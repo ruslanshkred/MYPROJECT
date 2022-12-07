@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}    
+
+{% block title %}
+View cart
+{% endblock title %}
+
+{% block body %}
+
+
+
+<h1>Order No {{ order.pk }}</h1>
+<table class='table'>
+    <tr>
+        <th>Status</th>
+        <th>Total costs</th>
+        <th>Phone number</th>
+        <th>Address</th>
+        <th>Additional info</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>{{ order.status }}</td>
+        <td>{{ order.cart.total_costs }}</td>
+        <td>{{ order.phone }}</td>
+        <td>{{ order.address }}</td>
+        <td>{{ order.additional_info }}</td>
+        <td>{% if perms.books.change_book %}<a href="{% url url_update_order pk=order.pk %}" class="btn btn-warning">Update</a>{% endif %}</td>
+    </tr>
+</table>
+<br>
+<table class='table'>
+    <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Price per position</th>
+        <th></th>
+    </tr>
+    {% for book_in_cart in order.cart.books.all %}
+
+    <tr>
+        <td>{{ book_in_cart.book.name }}</td>
+        <td>{{ book_in_cart.quantity }}</td>
+        <td>{{ book_in_cart.book.price }}</td>
+        <td>{{ book_in_cart.price_per_position }}</td>
+        <td>{% if perms.books.change_book %}<a href="{% url url_update_bic pk=book_in_cart.pk %}" class="btn btn-warning">Update</a>{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock body %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div class='row'>
+        {% for object in all %}
+        <div class="col-3">
+            <div class="card">
+                <img src="{{ object.logo.url }}" class="card-img-top" alt="..." height="300">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'books:book-detail' pk=object.pk %}">{{ object.name }}</a></h5>
+                    <p class="card-text">by {{ object.book_author }}</p>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" max="50" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ object.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <div class='row'>
+        {% for object in detectives %}
+        <div class="col-3">
+            <div class="card">
+                <img src="{{ object.logo.url }}" class="card-img-top" alt="..." height="300">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'books:book-detail' pk=object.pk %}">{{ object.name }}</a></h5>
+                    <p class="card-text">by {{ object.book_author }}</p>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" max="50" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ object.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <div class='row'>
+        {% for object in fantastic %}
+        <div class="col-3">
+            <div class="card">
+                <img src="{{ object.logo.url }}" class="card-img-top" alt="..." height="300">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'books:book-detail' pk=object.pk %}">{{ object.name }}</a></h5>
+                    <p class="card-text">by {{ object.book_author }}</p>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" max="50" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ object.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <div class='row'>
+        {% for object in novel %}
+        <div class="col-3">
+            <div class="card">
+                <img src="{{ object.logo.url }}" class="card-img-top" alt="..." height="300">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'books:book-detail' pk=object.pk %}">{{ object.name }}</a></h5>
+                    <p class="card-text">by {{ object.book_author }}</p>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" max="50" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ object.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
