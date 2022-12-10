@@ -14,4 +14,7 @@ urlpatterns=[
     path('del-order/<int:pk>/', views.DelOrder.as_view(), name='delete-order'),
     path('upd-order/<int:pk>/', views.UpdateOrder.as_view(), name='update-order'),
     path('upd-bic/<int:pk>/', views.UpdateBookInCart.as_view(), name='update-bic'),
+    path('cr-com/', views.CreateOrderComment.as_view(), name='create-order-comment'),
+    path('cr-com/success', views.CreateOrderComment.as_view(), name='create-order-comment'),
+ 
     ]

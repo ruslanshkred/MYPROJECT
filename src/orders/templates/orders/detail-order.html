@@ -49,6 +49,27 @@ View cart
     {% endfor %}
 </table>
 
+<h5>Comments</h5>
+{% for obj in comments %}
+<div class="container">
+	<div class="row comment">
+	    <div class="head">
+	        <small><strong class='user'>{{ obj.user }}</strong> {{ obj.created_date }}</small>
+	    </div>    
+	    <p>{{ obj.comment }}</p>
+	</div>
+</div>
+<hr>
+{% endfor %}
 
+
+
+<form action="{% url 'orders:create-order-comment' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="order_pk" value="{{ order.pk }}">
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>
+ 
 
 {% endblock body %}

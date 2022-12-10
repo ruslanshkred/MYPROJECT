@@ -23,7 +23,7 @@ All the orders
              
             </tr>
 
-            {% for obj in object_list %}
+            {% for obj in all_orders %}
             <tr>
                 <td><a href="{% url url_detail_name pk=obj.pk %}">{{ obj.pk }}</a></td>
                 <td>{{ obj.status }}</td>

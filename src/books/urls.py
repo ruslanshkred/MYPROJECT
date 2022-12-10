@@ -14,4 +14,6 @@ urlpatterns=[
     path('book-fantastic/', views.ShowFantastic.as_view(), name='book-fantastic'),
     path('book-novel/', views.ShowNovel.as_view(), name='book-novel'),
 
+    path('comment/', views.ListBookComment.as_view(), name='book-comment-list'),
+    path('comment-create/', views.CreateBookComment.as_view(), name='comment-create'),
     ]

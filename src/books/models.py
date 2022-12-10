@@ -2,6 +2,9 @@ from datetime import datetime
 from distutils.command.upload import upload
 from tabnanny import verbose
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 
@@ -110,3 +113,27 @@ class Book(models.Model):
 
     def __repr__(self):
         return self.name
+
+class BookComment(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='book_comment',
+        verbose_name="Comment of the user"
+    )
+    book = models.ForeignKey(
+        'books.Book',
+        verbose_name = 'Book to comment',
+        related_name='book_comment',
+        on_delete = models.PROTECT
+    )
+    comment = models.TextField(
+        verbose_name= 'Comment'
+    )
+    created_date = models.DateTimeField(
+        verbose_name = 'Created date',
+        auto_now = False,
+        auto_now_add = True
+    )
+    def __str__(self):
+        return self.comment

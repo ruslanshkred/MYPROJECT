@@ -18,3 +18,7 @@ class BookInCartForm(forms.ModelForm):
         fields = ['book', 'quantity']
 
 
+class OrderCommentForm(forms.ModelForm):
+    class Meta:
+        model = models.OrderComment
+        fields = ['comment']

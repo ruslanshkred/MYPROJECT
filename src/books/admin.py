@@ -26,4 +26,12 @@ class BookAdmin(admin.ModelAdmin):
         'book_last_change'
         )
 
+class BookCommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'book',
+        'comment',
+        'created_date'
+        )
 admin.site.register(models.Book, BookAdmin)
+admin.site.register(models.BookComment, BookCommentAdmin)

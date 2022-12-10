@@ -102,6 +102,9 @@ class OrderDetail(LoginRequiredMixin, DetailView):
         context = super().get_context_data(*args, **kwargs)
         context['url_update_order'] = 'orders:update-order'
         context['url_update_bic'] = 'orders:update-bic'
+        context['form'] = forms.OrderCommentForm
+        order_pk = self.object.pk
+        context['comments'] = models.OrderComment.objects.filter(order__pk=order_pk).all()
         return context
 
 class OrderList(LoginRequiredMixin, ListView):
@@ -111,8 +114,12 @@ class OrderList(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['my_orders'] = models.Order.objects.filter(cart__user=self.request.user)
+        # context['my_orders_not_done'] = models.Order.objects.filter(cart__user=self.request.user).exclude(status__name="Done")
+        #context['my_orders_done'] = models.Order.objects.filter(cart__user=self.request.user, status__name="Done")
+        # context['my_orders_commented'] = models.Order.objects.select_related('order_comment').filter(cart__user=self.request.user, status__name="Done")
         context['url_delete_name'] = 'orders:delete-order'
         context['url_detail_name'] = 'orders:detail-order'
+        # context['form'] = forms.OrderCommentForm
         return context
 
 class OrderAllList(LoginRequiredMixin, ListView):
@@ -121,6 +128,7 @@ class OrderAllList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context['all_orders'] = models.Order.objects.order_by('-created_date').all()
         context['url_detail_name'] = 'orders:detail-order'
         context['url_update_name'] = 'orders:update-order'
         return context
@@ -144,3 +152,39 @@ class UpdateBookInCart(UpdateView):
     form_class = forms.BookInCartForm
     template_name = 'orders/order_update.html'
     success_url = reverse_lazy('orders:list-order')
+
+class CreateOrderComment(LoginRequiredMixin, CreateView):
+    model = models.OrderComment
+    template_name = 'orders/create-comment.html'
+    form_class = forms.OrderCommentForm
+    login_url = reverse_lazy('login')
+    success_url = reverse_lazy('orders:order-success')
+    success_url = reverse_lazy('orders:list-order')
+
+    def form_valid(self, form):
+        order_pk = self.request.POST.get('order_pk')
+        print(order_pk)
+        order=models.Order.objects.get(pk=order_pk)
+        form.instance.order = order
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('orders:detail-order', kwargs={'pk': self.object.order.pk})
+
+class OrderCommentSuccess(TemplateView):
+    template_name = 'orders/comment-success-order.html'
+
+# class ListOrderComment(ListView):
+#     model = models.OrderComment
+#     template_name = 'orders/comments_list.html'
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args, **kwargs)
+#         context['operation_name'] = 'List of Comments'
+#         context['comments'] = models.OrderComment.objects.filter(pk=self.request.get.pk).all
+#         # context['url_delete_name'] = 'books:book-delete'
+#         # context['url_create_name'] = 'books:book-create'
+#         # context['url_detail_name'] = 'books:book-detail'
+#         # context['operation_for_add'] = 'Add new Book'
+#         return context
+

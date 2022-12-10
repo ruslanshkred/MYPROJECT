@@ -84,6 +84,7 @@ class HomePage(generic.TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['five_lasts'] = models.Book.objects.order_by('-book_input_in_catalog').all()[:4]
+        context['four_best_sales'] = models.Book.objects.order_by('-book_rating').all()[:4]
         return context
 
 class Delivery(generic.TemplateView):

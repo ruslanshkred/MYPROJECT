@@ -17,7 +17,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Price</th>
-                <th>Add to cart</th>
+                {% comment %} <th>Add to cart</th> {% endcomment %}
                 {% if perms.books.change_book %}
                 <th>Delete</th>
                 {% endif %}
@@ -32,14 +32,14 @@
                 <td> {{ obj.book_author }} </td>
 
                 <td> {{ obj.price }} </td>
-                <td>
+                {% comment %} <td>
                     <form action="{% url 'orders:show-cart' %}" method="post">
                         {% csrf_token %}
                         <input type="number" name="quantity" value="1" step="1" min="1">
                         <input type="hidden" name="book_pk" value="{{ obj.pk }}">
                         <button type="submit" class="btn btn-success">Add to Cart</button>
                     </form>
-                </td>
+                </td> {% endcomment %}
                 {% if perms.books.delete_book %}
                 <td><a href="{% url url_delete_name pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a> </td>
                 {% endif %}            

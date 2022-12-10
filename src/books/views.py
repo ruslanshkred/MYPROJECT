@@ -59,15 +59,19 @@ class DetailBook(generic.DetailView):
     template_name = 'books/detail.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['photo'] = id
+        #context['photo'] = id
         context['url_detail_name'] = 'books:book-detail'
+        # context['book_pk'] = self.object.pk
+        book_pk = self.object.pk
+        context['comments'] = models.BookComment.objects.filter(book__pk=book_pk).all()
+        context['form'] = forms.BookCommentForm
         return context
 
 class CreateBook(PermissionRequiredMixin, generic.CreateView):
     model = models.Book
     permission_required = 'books.add_book'
     template_name = 'books/edit.html'
-    form_class = forms.BookGroup
+    form_class = forms.BookForm
     success_url = reverse_lazy('books:book-list')
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -77,7 +81,7 @@ class CreateBook(PermissionRequiredMixin, generic.CreateView):
 class UpdateBook(PermissionRequiredMixin, generic.UpdateView):
     model = models.Book
     permission_required = 'books.change_book'
-    form_class = forms.BookGroup
+    form_class = forms.BookForm
     template_name = 'books/edit.html'
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -89,4 +93,36 @@ class DeleteBook(PermissionRequiredMixin, generic.DeleteView):
     permission_required = 'books.delete_book'
     template_name = 'books/delete.html'
     success_url = reverse_lazy('books:book-list')
+
+class ListBookComment(generic.ListView):
+    model = models.BookComment
+    template_name = 'books/comments_list.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['operation_name'] = 'List of Comments'
+        context['comments'] = models.BookComment.objects.filter(pk=self.request.get.pk).all()
+        # context['url_delete_name'] = 'books:book-delete'
+        # context['url_create_name'] = 'books:book-create'
+        # context['url_detail_name'] = 'books:book-detail'
+        # context['operation_for_add'] = 'Add new Book'
+        return context
+
+
+
+class CreateBookComment(LoginRequiredMixin, generic.CreateView):
+    model = models.BookComment
+    template_name = 'books/create-comment.html'
+    form_class = forms.BookCommentForm
+    login_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        book_pk = self.request.POST.get('book_pk')
+        book=models.Book.objects.get(pk=book_pk)
+        form.instance.book = book
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        book = models.Book.objects.get(pk=self.object.book.pk)
+        return reverse_lazy('books:book-detail', kwargs={'pk': self.object.book.pk})
 

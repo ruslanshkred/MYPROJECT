@@ -94,3 +94,28 @@ class Order(models.Model):
         auto_now = True,
         auto_now_add = False
     )
+
+
+class OrderComment(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='order_comment',
+        verbose_name="User"
+    )
+    order = models.ForeignKey(
+        'orders.Order',
+        verbose_name = 'Order to comment',
+        related_name='order_comment',
+        on_delete = models.CASCADE
+    )
+    comment = models.TextField(
+        verbose_name= 'Comment'
+    )
+    created_date = models.DateTimeField(
+        verbose_name = 'Created date',
+        auto_now = False,
+        auto_now_add = True
+    )
+    def __str__(self):
+        return self.comment

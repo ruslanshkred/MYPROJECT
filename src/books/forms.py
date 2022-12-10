@@ -1,7 +1,7 @@
 from django import forms
 from books import models
 
-class BookGroup(forms.ModelForm):
+class BookForm(forms.ModelForm):
     class Meta:
         model = models.Book
         fields = [
@@ -23,3 +23,9 @@ class BookGroup(forms.ModelForm):
             'book_status',
             'book_rating',
             ]
+
+class BookCommentForm(forms.ModelForm):
+    class Meta:
+        model = models.BookComment
+        fields = ['comment']
+

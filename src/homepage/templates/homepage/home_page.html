@@ -29,6 +29,30 @@ Home page
         </div>
         {% endfor %}
     </div>
+</div>
+<br>
+<div class="container">
+    <h1>Best sales</h1>
     
+    <div class='row'>
+        {% for obj in four_best_sales %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ obj.logo.url }}" class="card-img-top" alt="..." height="300">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'books:book-detail' pk=obj.pk %}">{{ obj.name }}</a></h5>
+                    <p class="card-text">by {{ obj.book_author }}</p>
+                    <form action="{% url 'orders:show-cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" max="50" name="quantity" value="1" step="1" min="1">
+                        <input type="hidden" name="book_pk" value="{{ obj.pk }}">
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>    
 
 {% endblock body %}

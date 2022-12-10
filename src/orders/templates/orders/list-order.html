@@ -2,45 +2,46 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-
-<h1>My orders</h1>
+My orders
 {% endblock title %}
+
 {% block body %}
 
 <div class="container">
     <div class="row">
         {% if my_orders %}
-        <table class="table table-bordered border-primary">
-            <tr>
-                <th>Order number</th>
-                <th>Status</th>
-                <th>Customer</th>
-                <th>Date of creation</th>
-                <th>Total costs</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Additional info</th>
-            </tr>
-
+        <h3>Orders of {{user.username}}</h3>
             {% for obj in my_orders %}
-            <tr>
-                <td><a href="{% url url_detail_name pk=obj.pk %}">{{ obj.pk }}</a></td>
-                <td>{{ obj.status }}</td>
-                <td>{{ obj.created_date }}</td>
-                <td>{{ obj.cart.total_costs }}</td>
-                <td>{{ obj.phone }}</td>
-                <td>{{ obj.address }}</td>
-                <td>{{ obj.additional_info }}</td>
-                <td><a href="{% url url_delete_name pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a> </td>
-            </tr>
+            <div>
+                <table class="table table-bordered border-primary">
+                    <tr>
+                        <th width="75">Order number</th>
+                        <th width="90">Status</th>
+                        <th width="200">Date of creation</th>
+                        <th width="100">Total costs</th>
+                        <th width="150">Phone</th>
+                        <th width="300">Address</th>
+                        <th>Additional info</th>
+                        <th width="65"></th>
+                    </tr>
+                    <tr>
+                        <td><a href="{% url url_detail_name pk=obj.pk %}">{{ obj.pk }}</a></td>
+                        <td>{{ obj.status }}</td>
+                        <td>{{ obj.created_date }}</td>
+                        <td>{{ obj.cart.total_costs }}</td>
+                        <td>{{ obj.phone }}</td>
+                        <td>{{ obj.address }}</td>
+                        <td>{{ obj.additional_info }}</td>
+                        <td><a href="{% url url_delete_name pk=obj.pk %}" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a></td>
+                    </tr>
+                </table>
+            </div>
+            <hr>
             {% endfor %}
-        </table>
+
         {% else %}
         <h3>There are no any orders</h3>
         {% endif %}
-       
-
-
- </div>
-
+    </div>
+</div>
 {% endblock body %}
