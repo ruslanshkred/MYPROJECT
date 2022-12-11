@@ -9,7 +9,7 @@ from django import forms
 from django.urls import reverse_lazy
 from . import forms
 from . import models as profile_models
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
@@ -98,7 +98,7 @@ class Delivery(generic.TemplateView):
 class SearchResultsView(generic.ListView):
     model = models.Book
     template_name = 'homepage/search.html'
-    def get_queryset(self): # новый
+    def get_queryset(self):
         query = self.request.GET.get('q')
         queryset = models.Book.objects.filter(
             Q(name__icontains=query) | Q(book_author__name__icontains=query) |

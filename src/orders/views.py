@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from . import models, forms
 from books import models as book_models
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-
+from django.core.mail import send_mail
 
 
 def show_cart(request):
@@ -65,8 +65,8 @@ class DelPosition(UserPassesTestMixin, DeleteView):
     def test_func(self):
         cart_id = self.request.session.get('cart_id')
         cart = models.Cart.objects.get(pk=cart_id)
-        the_good_to_be_deleted = self.get_object() #objects_list если много объектов
-        goods = cart.books.filter(pk=the_good_to_be_deleted.pk) #товары в корзинке, выборка
+        the_good_to_be_deleted = self.get_object() 
+        goods = cart.books.filter(pk=the_good_to_be_deleted.pk)
         return goods
 
 class UpdatePosition(UpdateView):
@@ -88,6 +88,12 @@ class Order(CreateView):
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
+        send_mail(
+            'New order',
+            'New order created',
+            'from@example.com',
+            ['to@example.com'],
+        )
         del self.request.session['cart_id']
         return super().get_success_url()
 
@@ -114,12 +120,8 @@ class OrderList(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['my_orders'] = models.Order.objects.filter(cart__user=self.request.user)
-        # context['my_orders_not_done'] = models.Order.objects.filter(cart__user=self.request.user).exclude(status__name="Done")
-        #context['my_orders_done'] = models.Order.objects.filter(cart__user=self.request.user, status__name="Done")
-        # context['my_orders_commented'] = models.Order.objects.select_related('order_comment').filter(cart__user=self.request.user, status__name="Done")
         context['url_delete_name'] = 'orders:delete-order'
         context['url_detail_name'] = 'orders:detail-order'
-        # context['form'] = forms.OrderCommentForm
         return context
 
 class OrderAllList(LoginRequiredMixin, ListView):
@@ -174,17 +176,4 @@ class CreateOrderComment(LoginRequiredMixin, CreateView):
 
 class OrderCommentSuccess(TemplateView):
     template_name = 'orders/comment-success-order.html'
-
-# class ListOrderComment(ListView):
-#     model = models.OrderComment
-#     template_name = 'orders/comments_list.html'
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(*args, **kwargs)
-#         context['operation_name'] = 'List of Comments'
-#         context['comments'] = models.OrderComment.objects.filter(pk=self.request.get.pk).all
-#         # context['url_delete_name'] = 'books:book-delete'
-#         # context['url_create_name'] = 'books:book-create'
-#         # context['url_detail_name'] = 'books:book-detail'
-#         # context['operation_for_add'] = 'Add new Book'
-#         return context
 
