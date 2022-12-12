@@ -145,7 +145,7 @@ class UpdateOrder(UpdateView):
     model = models.Order
     form_class = forms.OrderUpdateForm
     template_name = 'orders/order_update.html'
-    success_url = reverse_lazy('orders:list-order')
+    success_url = reverse_lazy('orders:list-allorder')
 
 
 
